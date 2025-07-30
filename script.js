@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counters.forEach(counter => {
             const target = parseInt(counter.getAttribute('data-target'));
             const duration = 2000; // 2 seconds
-            const increment = target / (duration / 16); // 60 FPS
+            const increment = target / (duration / 16); // ~60 FPS
             let current = 0;
 
             function updateCounter() {
@@ -171,10 +171,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Contact form enhancements
-    const contactForm = document.querySelector('.contact-form');
+    // -----------------------------
+    // Contact form (FormSubmit)
+    // -----------------------------
+    const contactForm = document.getElementById('contactForm');
     const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
 
+    // Floating labels / focus styles
     formInputs.forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.classList.add('focused');
@@ -192,42 +195,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Contact form submission
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            // Simple validation
-            if (!name || !email || !message) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-
-            if (!isValidEmail(email)) {
-                showNotification('Please enter a valid email address', 'error');
-                return;
-            }
-
-            // Simulate form submission
-            showNotification('Thank you! Your message has been sent.', 'success');
-            contactForm.reset();
-            
-            // Remove focused class from all form groups
-            document.querySelectorAll('.form-group').forEach(group => {
-                group.classList.remove('focused');
-            });
-        });
-    }
-
     // Email validation function
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
+    }
+
+    // Contact form submission (validation only; allow POST to FormSubmit)
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                e.preventDefault();
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            if (!isValidEmail(email)) {
+                e.preventDefault();
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            // If valid, DO NOT call e.preventDefault(); browser will POST to FormSubmit.
+        });
     }
 
     // Notification system
@@ -263,6 +255,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.removeChild(notification);
             }, 300);
         }, 3000);
+    }
+
+    // Show success toast after FormSubmit redirect
+    if (location.hash.includes('sent=1') || location.search.includes('sent=1')) {
+        showNotification('Thank you! Your message has been sent.', 'success');
+        // Clean the URL so the parameter doesn't persist
+        history.replaceState({}, document.title, location.pathname + '#contact');
     }
 
     // Scroll-based effects
@@ -349,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // ===== NEW: Make About stats keyboard-activatable =====
+    // Make About stats keyboard-activatable
     const statItems = document.querySelectorAll('.stat-item[data-modal]');
     statItems.forEach(item => {
         item.addEventListener('keydown', (e) => {

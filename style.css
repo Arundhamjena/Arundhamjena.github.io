@@ -409,3 +409,30 @@ button:focus, input:focus, textarea:focus, a:focus {
   .navbar, .cta-buttons, .contact-form { display: none; }
   .hero, .section { page-break-inside: avoid; }
 }
+
+/* Override: hide placeholder text to avoid overlap with floating labels */
+.contact-form .form-group input::placeholder,
+.contact-form .form-group textarea::placeholder { 
+  color: transparent; 
+}
+
+/* Vendor prefixes for broader support */
+.contact-form .form-group input::-webkit-input-placeholder,
+.contact-form .form-group textarea::-webkit-input-placeholder { color: transparent; }
+.contact-form .form-group input:-ms-input-placeholder,
+.contact-form .form-group textarea:-ms-input-placeholder { color: transparent; }
+
+/* Contact icons */
+.contact-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  opacity: 0.95;
+}
+
+/* If your icons are dark PNG/SVG, invert them to look white on blue */
+.contact .contact-icon-img.needs-invert {
+  filter: brightness(0) invert(1);
+}

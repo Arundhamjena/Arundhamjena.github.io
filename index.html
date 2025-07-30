@@ -234,33 +234,46 @@
             <p>I'm always interested in discussing data analytics opportunities and collaborating on exciting projects.</p>
             <div class="contact-methods">
               <div class="contact-method">
-                <span class="contact-icon">📧</span>
-                <span><a href="mailto:arundhamjena04@gmail.com" style="color:#fff; text-decoration:underline;">arundhamjena04@gmail.com</a></span>
+                <img class="contact-icon-img" src="assets/icons/email.svg" alt="Email">
+                <a href="mailto:arundhamjena04@gmail.com">arundhamjena04@gmail.com</a>
               </div>
               <div class="contact-method">
-                <span class="contact-icon">💼</span>
-                <span><a href="https://www.linkedin.com/in/arundham-jena-39as/" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;">LinkedIn: /in/arundham-jena-39as/</a></span>
+                <img class="contact-icon-img" src="assets/icons/linkedin.svg" alt="LinkedIn">
+                <a href="https://www.linkedin.com/in/arundham-jena-39as/" target="_blank" rel="noopener">LinkedIn: /in/arundham-jena-39as/</a>
               </div>
               <div class="contact-method">
-                <span class="contact-icon">🐙</span>
-                <span><a href="https://github.com/Arundhamjena" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;">GitHub: /Arundhamjena</a></span>
+                <img class="contact-icon-img" src="assets/icons/github.svg" alt="GitHub">
+                <a href="https://github.com/Arundhamjena" target="_blank" rel="noopener">GitHub: /Arundhamjena</a>
               </div>
             </div>
           </div>
           
-          <form class="contact-form">
+          <form class="contact-form" id="contactForm"
+            action="https://formsubmit.co/arundhamjena04@gmail.com"
+            method="POST" novalidate>
+            <!-- FormSubmit settings -->
+            <input type="hidden" name="_subject"  value="New message from arundhamjena.github.io">
+            <input type="hidden" name="_captcha"  value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next"     value="https://arundhamjena.github.io/#contact?sent=1">
+            <!-- Honeypot (spam trap) -->
+            <input type="text" name="_honey" style="display:none">
+
             <div class="form-group">
-              <input type="text" id="name" required>
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
               <label for="name">Your Name</label>
             </div>
+
             <div class="form-group">
-              <input type="email" id="email" required>
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
               <label for="email">Your Email</label>
             </div>
+
             <div class="form-group">
-              <textarea id="message" rows="5" required></textarea>
+              <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
               <label for="message">Your Message</label>
             </div>
+
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
         </div>
