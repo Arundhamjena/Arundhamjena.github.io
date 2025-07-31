@@ -125,8 +125,8 @@ body {
 .hero h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
 
 .highlight {
-  color: #ffd700;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  color: #f0c14b;  /* Softer amber tone */
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);  /* Very subtle shadow */
   transition: all 0.3s ease;
 }
 .highlight:hover { transform: scale(1.05); text-shadow: 3px 3px 6px rgba(0,0,0,0.5); }
